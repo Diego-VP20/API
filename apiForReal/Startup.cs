@@ -55,6 +55,7 @@ namespace apiForReal
 
         private static IEdmModel GetEdmModel()
         {
+
             var builder = new ODataConventionModelBuilder();
 
             builder.EnableLowerCamelCase();
@@ -62,14 +63,19 @@ namespace apiForReal
             builder.EntitySet<Worker>("Worker");
             builder.EntitySet<Department>("Department");
             builder.EntitySet<User>("User");
-
-            EntityTypeConfiguration<Ticket> tickets = builder.EntitySet<Ticket>("Ticket").EntityType;
+            builder.EntitySet<Ticket>("Ticket");
+            /*EntityTypeConfiguration<Ticket> tickets = builder.EntitySet<Ticket>("Ticket").EntityType;
 
             tickets.HasKey(t => t.CustomerId);
             tickets.HasKey(t => t.DepartmentId);
             tickets.HasKey(t => t.WorkerId);
 
+            tickets.HasRequired(t => t.CustomerId, (o, c) => o.CustomerId == c.Id);*/
+
             return builder.GetEdmModel();
         }
+
+
+
     }
 }

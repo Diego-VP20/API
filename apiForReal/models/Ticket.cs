@@ -13,15 +13,15 @@ namespace apiForReal.models
         public int Id { get; set; }
         
         [ForeignKey("Customer")]
-        public int? CustomerId { get; set; }
+        public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
         
         [ForeignKey("Worker")]
-        public int? WorkerId { get; set; }
+        public int WorkerId { get; set; }
         public virtual Worker Worker { get; set; }
         
         [ForeignKey("Department")]
-        public int? DepartmentId { get; set; }
+        public int DepartmentId { get; set; }
         public virtual Department Department { get; set; }
         
         public bool IsSolved { get; set; }
