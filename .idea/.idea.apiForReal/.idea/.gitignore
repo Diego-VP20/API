@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/projectSettingsUpdater.xml
+/contentModel.xml
+/.idea.apiForReal.iml
+/modules.xml
+# Datasource local storage ignored files
+/../../../../../../../../../:\Users\Diego\source\repos\apiForReal\.idea\.idea.apiForReal\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
