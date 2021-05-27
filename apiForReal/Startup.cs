@@ -29,6 +29,37 @@ namespace apiForReal
 
         public void ConfigureServices(IServiceCollection services)
         {
+
+            var jwtTokenConfig = Configuration.GetSection("jwtTokenConfig").Get<JwtTokenConfig>();
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(x =>
+            {
+
+                x.RequireHttpsMetadata = true;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+
+                    ValidateIssuer = true,
+                    ValidIssuer = jwtTokenConfig.Issuer,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtTokenConfig.Secret)),
+                    ValidAudience = jwtTokenConfig.Audience,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.FromMinutes(1)
+
+                };
+
+            });
+
+            services.AddSingleton(jwtTokenConfig);
+            services.AddSingleton<IJwtAuthManager, JwtAuthManager>();
             services.AddRouting();
             services.AddMvc();
             services.AddControllers();
@@ -41,9 +72,8 @@ namespace apiForReal
         {
 
             app.UseRouting();
-            //app.UseAuthentication();
-            //app.UseAuthorization();
-            
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

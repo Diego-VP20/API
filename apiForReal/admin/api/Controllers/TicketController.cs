@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
-using System.Web.Http;
 using apiForReal.models;
 using Microsoft.AspNet.OData;
+using System.Web.Http;
 
 namespace apiForReal.admin.api.Controllers
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(Roles = "test")]
     public class TicketController : ODataController
     {
         private DbTicketsContext _dbTicketsContext;

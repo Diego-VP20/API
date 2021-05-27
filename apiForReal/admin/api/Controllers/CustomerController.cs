@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Http;
+using Microsoft.AspNetCore.Authorization;
 using apiForReal.models;
 using Microsoft.AspNet.OData;
 using SingleResult = Microsoft.AspNet.OData.SingleResult;
 
 namespace apiForReal.admin.api.Controllers
 {
+    [Authorize(Roles = "test")]
     public class CustomerController : ODataController
     {
         private DbTicketsContext dbTicketsContext;

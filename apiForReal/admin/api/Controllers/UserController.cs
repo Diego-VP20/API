@@ -1,9 +1,11 @@
 ﻿using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using apiForReal.models;
 using Microsoft.AspNet.OData;
 
 namespace apiForReal.admin.api.Controllers
 {
+    [Authorize(Roles = "test")]
     public class UserController : ODataController
     {
         private DbTicketsContext dbTicketsContext;
